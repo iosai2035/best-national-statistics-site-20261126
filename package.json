@@ -1,0 +1,1 @@
+{"description":"UKStat — the United Kingdom's numbers, clearly. A national statistics portal that runs entirely from its own static files.","name":"best-national-statistics-site","private":true,"scripts":{"build":"node main.ts","start":"node serve.ts"},"type":"module"}
