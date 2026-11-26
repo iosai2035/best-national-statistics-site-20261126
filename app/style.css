@@ -1,0 +1,812 @@
+/* UKStat — the look of the site.
+ *
+ * Deep navy, teal and amber on warm paper: the masthead and headings are
+ * navy, links and accents are teal, amber marks the active section and the
+ * focus ring. Georgia carries the numbers and headings; the interface is
+ * system sans. No webfont is loaded anywhere, so the site makes no network
+ * request at all.
+ *
+ * The rules below are grouped by the part of the page they style, in the
+ * order a reader meets them: tokens, page base, masthead, navigation,
+ * page furniture, dashboard cards, charts, tables, lists, datasets
+ * controls, footer — then print and phone at the end. */
+
+/* ---- Tokens ---- */
+:root {
+  --navy: #10233f;
+  --navy-soft: #1b3a5e;
+  --teal: #0e7c6b;
+  --teal-dark: #0a5f52;
+  --amber: #e8a317;
+  --paper: #f7f5f0;
+  --card: #ffffff;
+  --ink: #1c2430;
+  --muted: #5a6472;
+  --line: #d9dee6;
+  --line-soft: #eceff3;
+  --shadow: 0 1px 2px rgba(16, 35, 63, 0.06);
+}
+
+/* ---- Page base ---- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font: 17px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+h1,
+h2,
+h3,
+.card-value,
+.headline-value,
+.wordmark-name {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.15;
+  color: var(--navy);
+}
+
+h1 {
+  margin: 0.4em 0 0.3em;
+  font-size: 2.1rem;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  margin: 1.6em 0 0.6em;
+  padding-top: 0.4em;
+  border-top: 2px solid var(--navy);
+  font-size: 1.35rem;
+}
+
+h3 {
+  margin: 0 0 0.4em;
+  font-size: 1.05rem;
+}
+
+a {
+  color: var(--teal-dark);
+}
+
+a:hover {
+  color: var(--teal);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* Text that is only for screen readers. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---- Masthead ---- */
+.masthead {
+  color: #fff;
+  background: var(--navy);
+}
+
+.masthead-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 18px 20px 14px;
+}
+
+.wordmark {
+  color: #fff;
+  text-decoration: none;
+}
+
+.wordmark-name {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.wordmark-tag {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.85rem;
+  color: #c8d3e0;
+}
+
+.masthead form {
+  display: flex;
+  gap: 8px;
+}
+
+.masthead input[type="search"] {
+  width: 260px;
+  max-width: 60vw;
+  padding: 9px 12px;
+  border: 1px solid #3a5578;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: #fff;
+}
+
+.masthead button,
+form button[type="submit"] {
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--teal);
+  cursor: pointer;
+}
+
+.masthead button:hover,
+form button[type="submit"]:hover {
+  background: var(--teal-dark);
+}
+
+/* ---- Section navigation ---- */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+  border-top: 1px solid #243d5e;
+}
+
+nav a {
+  padding: 10px 12px 11px;
+  border-bottom: 3px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #dbe4ef;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+nav a[aria-current="page"] {
+  border-bottom-color: var(--amber);
+  color: #fff;
+}
+
+/* ---- Page furniture ---- */
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 8px 20px 48px;
+}
+
+.kicker {
+  margin: 18px 0 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+}
+
+.lede {
+  max-width: 62ch;
+  font-size: 1.12rem;
+  color: #33405a;
+}
+
+.crumb {
+  margin: 18px 0 0;
+  font-size: 0.95rem;
+}
+
+.section-intro {
+  margin-top: -4px;
+  color: var(--muted);
+}
+
+/* Two-column section (releases beside nations on the dashboard). */
+.two-col {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  margin-top: 8px;
+}
+
+.two-col h2 {
+  margin-top: 1.2em;
+}
+
+/* ---- Headline number on indicator pages ---- */
+.headline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 16px;
+  margin: 16px 0;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--teal);
+  border-radius: 8px;
+  background: var(--card);
+}
+
+.headline-value {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.headline p {
+  margin: 0;
+}
+
+/* When the figures on the page were published, and by whom. */
+.updated-line {
+  margin: 0 0 4px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ---- Dashboard cards ---- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.card {
+  padding: 16px 18px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  background: var(--card);
+}
+
+.card h3 {
+  margin: 0 0 6px;
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;
+}
+
+.card h3 a {
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.card h3 a:hover {
+  color: var(--teal-dark);
+  text-decoration: underline;
+}
+
+.card-value {
+  margin: 2px 0 4px;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.card-change {
+  margin: 0 0 2px;
+  font-size: 0.92rem;
+  color: #33405a;
+}
+
+.card-period {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.card-fact {
+  margin: 8px 0 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+/* Change arrows: up, down and flat all read in teal except flat, which is
+   muted, because the direction is in the number beside the arrow. */
+.arrow {
+  font-size: 0.8em;
+}
+
+.arrow.up,
+.arrow.down {
+  color: var(--teal-dark);
+}
+
+.arrow.flat {
+  color: var(--muted);
+}
+
+.spark {
+  display: block;
+  width: 100%;
+  height: 36px;
+  margin-top: 6px;
+}
+
+/* ---- Charts ---- */
+.chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.chart-head h3 {
+  margin: 0;
+}
+
+.chart-unit {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.chart-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+
+.chart-switch button {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--navy);
+  background: #fff;
+  cursor: pointer;
+}
+
+.chart-switch button:hover {
+  border-color: var(--teal);
+}
+
+.chart-switch button[aria-pressed="true"] {
+  border-color: var(--navy);
+  color: #fff;
+  background: var(--navy);
+}
+
+.chart-note {
+  max-width: 72ch;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.chart-source {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+/* "View as table" under a chart: the toggle button and the panel it
+   opens. The panel is hidden until asked for, so a chart and its table
+   never compete for the reader's eye. */
+.chart-table-wrap {
+  margin: 10px 0 4px;
+}
+
+.table-toggle {
+  padding: 7px 14px;
+  border: 1px solid var(--teal);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--teal-dark);
+  background: #fff;
+  cursor: pointer;
+}
+
+.table-toggle:hover {
+  color: #fff;
+  background: var(--teal);
+}
+
+.chart-table {
+  margin-top: 10px;
+}
+
+.chart-table table {
+  margin-top: 0;
+}
+
+.chart-table caption {
+  padding-bottom: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+  color: var(--navy);
+}
+
+/* Text inside the SVG charts. These classes are set by charts.js, so the
+   chart marks and their labels share the site's type scale. */
+.grid,
+.grid-v {
+  stroke: var(--line-soft);
+  stroke-width: 1;
+}
+
+.zero {
+  stroke: #9aa7b8;
+  stroke-width: 1.2;
+}
+
+.line {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.dot {
+  fill: #fff;
+  stroke: var(--teal);
+  stroke-width: 2;
+}
+
+.dot-last {
+  fill: var(--teal);
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.ylab,
+.xlab {
+  font: 12px system-ui, sans-serif;
+  fill: var(--muted);
+}
+
+.last-label,
+.bar-label {
+  font: 700 14px system-ui, sans-serif;
+  fill: var(--navy);
+}
+
+.hbar-value {
+  font: 700 13px system-ui, sans-serif;
+  fill: var(--navy);
+}
+
+.dumbbell-line {
+  stroke: #b9c4d2;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.dot-m {
+  fill: var(--navy);
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.dot-f {
+  fill: var(--teal);
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.dot-label {
+  font: 700 12px system-ui, sans-serif;
+  fill: var(--navy);
+}
+
+.row-label {
+  font: 600 13px system-ui, sans-serif;
+  fill: var(--ink);
+}
+
+.legend-m {
+  font: 600 12px system-ui, sans-serif;
+  fill: var(--navy);
+}
+
+.legend-f {
+  font: 600 12px system-ui, sans-serif;
+  fill: var(--teal-dark);
+}
+
+/* ---- Tables ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+th,
+td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line-soft);
+  text-align: left;
+}
+
+th {
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: var(--navy);
+}
+
+/* Numbers right-align; the first column (the label) stays left. */
+td:nth-child(n+2),
+th:nth-child(n+2) {
+  text-align: right;
+}
+
+td:first-child,
+th:first-child {
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background: #faf9f6;
+}
+
+/* The datasets table has mostly text columns, so only its value column
+   (the third) right-aligns. */
+table.datasets td:nth-child(2),
+table.datasets th:nth-child(2),
+table.datasets td:nth-child(4),
+table.datasets th:nth-child(4),
+table.datasets td:nth-child(5),
+table.datasets th:nth-child(5),
+table.datasets td:nth-child(6),
+table.datasets th:nth-child(6) {
+  text-align: left;
+}
+
+/* ---- Lists: key facts, releases, nations ---- */
+.facts {
+  padding-left: 20px;
+}
+
+.facts li {
+  max-width: 72ch;
+  margin-bottom: 8px;
+}
+
+.releases {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.releases li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.releases li strong {
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+.releases li span {
+  font-size: 0.94rem;
+  color: #33405a;
+}
+
+.releases .rel-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.nations {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nations li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.nations li strong {
+  color: var(--navy);
+}
+
+/* ---- Datasets search and CSV buttons ---- */
+#dataset-search-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 8px;
+}
+
+#dataset-search-form label {
+  font-weight: 600;
+}
+
+#dataset-search {
+  flex: 1 1 280px;
+  max-width: 420px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: inherit;
+  background: #fff;
+}
+
+.result-count {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.csv-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--teal);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--teal-dark);
+  background: #fff;
+  cursor: pointer;
+}
+
+.csv-btn:hover {
+  color: #fff;
+  background: var(--teal);
+}
+
+/* ---- Footer ---- */
+footer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 20px 40px;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+footer p {
+  margin: 6px 0;
+}
+
+/* No JavaScript: the message that replaces the (JS-rendered) content. */
+.noscript {
+  max-width: 62ch;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--amber);
+  border-radius: 8px;
+  font-size: 1.05rem;
+  background: var(--card);
+}
+
+/* ---- Print: a statistics page should print cleanly. Hide the controls
+   and keep each card, chart and table on one page where it fits. ---- */
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .masthead form,
+  nav,
+  .chart-switch,
+  .csv-btn,
+  .table-toggle,
+  #dataset-search-form {
+    display: none;
+  }
+
+  .card,
+  .chart,
+  .headline,
+  table {
+    break-inside: avoid;
+  }
+
+  a {
+    color: var(--navy);
+  }
+}
+
+/* ---- Phone ---- */
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .masthead-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .masthead form {
+    width: 100%;
+  }
+
+  .masthead input[type="search"] {
+    width: 100%;
+    max-width: none;
+  }
+
+  nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  nav a {
+    white-space: nowrap;
+  }
+
+  /* Every other year label is enough on a narrow chart. */
+  .xlab.minor {
+    display: none;
+  }
+
+  /* Wide tables scroll inside their own box instead of pushing the page. */
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .headline-value {
+    font-size: 2rem;
+  }
+
+  .card-value {
+    font-size: 1.9rem;
+  }
+}
